@@ -1,0 +1,27 @@
+Reconnaissance 
+
+https://github.com/BishopFox/spoofcheck
+https://github.com/1N3/Sn1per
+
+Passive recon
+https://github.com/SpiderLabs/social_mapper
+https://github.com/nccgroup/typofinder
+https://github.com/thewhiteh4t/pwnedOrNot
+https://github.com/vysecurity/LinkedInt
+https://github.com/m8r0wn/CrossLinked
+
+framework
+https://github.com/DataSploit/datasploit
+https://www.paterva.com/web7/downloads.php
+https://github.com/smicallef/spiderfoot
+
+weaponization 
+https://github.com/mdsecactivebreach/CACTUSTORCH3
+https://github.com/trustedsec/nps_payload
+
+https://github.com/rapid7/metasploit-framework
+https://cobaltstrike.com/
+
+Latereal Movement
+https://github.com/BloodHoundAD/SharpHound
+https://github.com/CoreSecurity/impacket
