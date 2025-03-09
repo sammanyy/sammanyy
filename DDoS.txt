@@ -1,0 +1,13 @@
+DDoS
+
+How many DoS are there
+1) Ping Flood / ICMP Flood
+2) Slowloris Attack 
+3) HTTP Flood Attack
+4) SYN FLOOD (PRACTICAL)
+5) UDP FLOOD 
+6) PING OF DEATH ATTACK (PRACTICAL)
+
+WHAT MODULE CAN WE MAKE USE 
+- METASPLOIT (AUXILIARY/DOS/TCP/SYNFLOOD)
+- hping3 -S <IP> <PORT> --flood
