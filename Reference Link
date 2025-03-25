@@ -1,0 +1,29 @@
+Summary 
+
+Hacktricks
+- https://hacktricks.boitatech.com.br/
+
+Oracle Database attacking Tool
+- https://github.com/quentinhardy/odat
+
+Active Directory Attacking Tool
+- https://github.com/samratashok/nishang
+#Reverse of Bind Interactive Shell
+- https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1
+
+ReverseShell Generator 
+- https://www.revshells.com/
+
+
+nc64 Installation 
+https://github.com/int0x33/nc.exe/blob/master/nc64.exe
+
+Privilege Escalation 
+- https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+
+Cheatsheet
+- https://strange-1.gitbook.io/notes/shells/spawning-a-tty-shell
+- https://pentestmonkey.net/
+
+AD youtube reference 
+- https://www.youtube.com/watch?v=xowytiyooBk
